@@ -48,5 +48,27 @@ namespace CrmUI
                 db.SaveChanges();
             }
         }
+
+        private void sellerAddToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            SellerForm sellerForm = new SellerForm();
+
+            if (sellerForm.ShowDialog() == DialogResult.OK)
+            {
+                db.Sellers.Add(sellerForm.Seller);
+                db.SaveChanges();
+            }
+        }
+
+        private void productAddToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProductForm productForm = new ProductForm();
+
+            if (productForm.ShowDialog() == DialogResult.OK)
+            {
+                db.Products.Add(productForm.Product);
+                db.SaveChanges();
+            }
+        }
     }
 }
