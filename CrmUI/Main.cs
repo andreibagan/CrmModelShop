@@ -6,35 +6,35 @@ namespace CrmUI
 {
     public partial class Main : Form
     {
-        CrmContext db;
+        CrmContext _dbContext;
 
         public Main()
         {
             InitializeComponent();
-            db = new CrmContext();
+            _dbContext = new CrmContext();
         }
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Catalog<Product> catalog = new Catalog<Product>(db.Products);
+            Catalog<Product> catalog = new Catalog<Product>(_dbContext.Products, _dbContext);
             catalog.Show();
         }    
 
         private void sellerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Catalog<Seller> catalog = new Catalog<Seller>(db.Sellers);
+            Catalog<Seller> catalog = new Catalog<Seller>(_dbContext.Sellers, _dbContext);
             catalog.Show();
         }
 
         private void customerToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Catalog<Customer> catalog = new Catalog<Customer>(db.Customers);
+            Catalog<Customer> catalog = new Catalog<Customer>(_dbContext.Customers, _dbContext);
             catalog.Show();
         }
 
         private void checkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Catalog<Check> catalog = new Catalog<Check>(db.Checks);
+            Catalog<Check> catalog = new Catalog<Check>(_dbContext.Checks, _dbContext);
             catalog.Show();
         }
 
@@ -44,8 +44,8 @@ namespace CrmUI
 
             if (customerForm.ShowDialog() == DialogResult.OK)
             {
-                db.Customers.Add(customerForm.Customer);
-                db.SaveChanges();
+                _dbContext.Customers.Add(customerForm.Customer);
+                _dbContext.SaveChanges();
             }
         }
 
@@ -55,8 +55,8 @@ namespace CrmUI
 
             if (sellerForm.ShowDialog() == DialogResult.OK)
             {
-                db.Sellers.Add(sellerForm.Seller);
-                db.SaveChanges();
+                _dbContext.Sellers.Add(sellerForm.Seller);
+                _dbContext.SaveChanges();
             }
         }
 
@@ -66,8 +66,8 @@ namespace CrmUI
 
             if (productForm.ShowDialog() == DialogResult.OK)
             {
-                db.Products.Add(productForm.Product);
-                db.SaveChanges();
+                _dbContext.Products.Add(productForm.Product);
+                _dbContext.SaveChanges();
             }
         }
     }
