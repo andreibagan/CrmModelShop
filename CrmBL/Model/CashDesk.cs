@@ -13,6 +13,7 @@ namespace CrmBL.Model
         public int MaxQueueLenght { get; set; }
         public int ExitCustomer { get; set; }
         public bool isModel { get; set; }
+        public int Count => Queue.Count;
 
         public CashDesk(int number, Seller seller)
         {
@@ -37,6 +38,11 @@ namespace CrmBL.Model
         public decimal Dequeue()
         {
             decimal sum = 0;
+
+            if (Queue.Count == 0)
+            {
+                return 0;
+            }
 
             Cart cart = Queue.Dequeue();
 
