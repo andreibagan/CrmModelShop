@@ -22,14 +22,12 @@ namespace CrmUI
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Product product = Product ?? new Product()
+            Product = Product ?? new Product()
             {
                 Name = textBox1.Text,
                 Price = numericUpDown1.Value,
                 Count = Convert.ToInt32(numericUpDown2.Value),
             };
-
-            Product = product;
 
             Close();
         }
