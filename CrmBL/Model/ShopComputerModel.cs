@@ -16,7 +16,9 @@ namespace CrmBL.Model
         public List<Cart> Carts { get; set; } = new List<Cart>();
         public List<Check> Checks { get; set; } = new List<Check>();
         public List<Sell> Sells { get; set; } = new List<Sell>();
-        public Queue<Seller> Sellers { get; set; } = new Queue<Seller>(); 
+        public Queue<Seller> Sellers { get; set; } = new Queue<Seller>();
+        public int CustomerSpeed { get; set; } = 100;
+        public int CashDeskSpeed { get; set; } = 100;
 
         public ShopComputerModel()
         {
@@ -38,9 +40,9 @@ namespace CrmBL.Model
         public void Start()
         {
             isWorking = true;
-            Task.Run(() => CreateCarts(10, 1000));
+            Task.Run(() => CreateCarts(10, CustomerSpeed));
 
-            var cashDeskTasks = CashDesks.Select(c => new Task(() => CashDeskWork(c, 1000)));
+            var cashDeskTasks = CashDesks.Select(c => new Task(() => CashDeskWork(c, CashDeskSpeed)));
 
             foreach (var task in cashDeskTasks)
             {
@@ -80,7 +82,7 @@ namespace CrmBL.Model
                         cart.Add(product);
                     }
 
-                    CashDesk cashDesk = CashDesks[random.Next(CashDesks.Count - 1)];
+                    CashDesk cashDesk = CashDesks[random.Next(CashDesks.Count)];
                     cashDesk.Enqueue(cart);
                 }
 

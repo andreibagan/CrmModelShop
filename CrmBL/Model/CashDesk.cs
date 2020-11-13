@@ -16,12 +16,18 @@ namespace CrmBL.Model
         public int Count => Queue.Count;
         public event EventHandler<Check> CheckClosed;
 
+        public override string ToString()
+        {
+            return $"Касса №{Number}";
+        }
+
         public CashDesk(int number, Seller seller)
         {
             Number = number;
             Seller = seller;
             Queue = new Queue<Cart>();
             isModel = true;
+            MaxQueueLenght = 10;
         }
 
         public void Enqueue(Cart cart)
